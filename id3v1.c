@@ -34,6 +34,26 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 	fread(comment, 30, 1, inputFilePointer);
 	genre = getc(inputFilePointer);
 
+	if (strlen(title) == 0) {
+		strcpy(title, "-");
+	}
+
+	if (strlen(artist) == 0) {
+		strcpy(artist, "-");
+	}
+
+	if (strlen(album) == 0) {
+		strcpy(album, "-");
+	}
+
+	if (strlen(year) == 0) {
+		strcpy(year, "-");
+	}
+
+	if (strlen(comment) == 0) {
+		strcpy(comment, "-");
+	}
+
 	if (tabulated) {
 		printf("%s\t", title);
 		printf("%s\t", artist);
