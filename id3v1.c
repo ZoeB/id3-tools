@@ -57,7 +57,7 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 		}
 	} else {
 		if (tabulated) {
-			printf("\t");
+			printf("--\t");
 		}
 	}
 
@@ -238,7 +238,7 @@ int main(int argc, char *argv[]) {
 				printf("Album\t");
 				printf("Year\t");
 				printf("Comment\t");
-				printf("#\t");
+				printf("T#\t");
 				printf("Genre\n");
 
 				continue;
