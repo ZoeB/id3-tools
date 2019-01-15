@@ -71,7 +71,6 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 }
 
 int main(int argc, char *argv[]) {
-	int argi = 1;
 	FILE *filePointer;
 
 	/* See "lame --genre-list" */
@@ -224,26 +223,33 @@ int main(int argc, char *argv[]) {
 	genres[146] = "JPop";
 	genres[147] = "SynthPop";
 
-	for (argi = 1; argi < argc; argi++) {
-		if (strcmp(argv[argi], "-t") == 0) {
-			tabulated = 1;
-			continue;
+	if (argc == 1) {
+		return 0; /* Only work with named files, not stdin */
+	} else {
+		argv++;
+
+		while (--argc > 0) {
+			if (strcmp(*argv, "-t") == 0) {
+				tabulated = 1;
+				argv++;
+				continue;
+			}
+
+			filePointer = fopen(*argv++, "r");
+
+			if (filePointer == NULL) {
+				continue;
+			}
+
+			if (tabulated) {
+				printf("%s\t", *argv);
+			} else {
+				printf("%s\n", *argv);
+			}
+
+			describeFile(filePointer, stdout);
+			fclose(filePointer);
 		}
-
-		filePointer = fopen(argv[argi], "r");
-
-		if (filePointer == NULL) {
-			continue;
-		}
-
-		if (tabulated) {
-			printf("%s\t", argv[argi]);
-		} else {
-			printf("%s\n", argv[argi]);
-		}
-
-		describeFile(filePointer, stdout);
-		fclose(filePointer);
 	}
 
 	return 0;
