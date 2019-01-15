@@ -12,7 +12,6 @@ char year[4] = "    ";
 char comment[30] = "                              ";
 char genre = '\0';
 const char *genres[148];
-int tabulated = 0;
 
 void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 	fseek(inputFilePointer, -128, SEEK_END);
@@ -54,39 +53,20 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 		strcpy(comment, "-");
 	}
 
-	if (tabulated) {
-		printf("%s\t", title);
-		printf("%s\t", artist);
-		printf("%s\t", album);
-		printf("%s\t", year);
-		printf("%s\t", comment);
-	} else {
-		printf("Title   : %s\n", title);
-		printf("Artist  : %s\n", artist);
-		printf("Album   : %s\n", album);
-		printf("Year    : %s\n", year);
-		printf("Comment : %s\n", comment);
-	}
+	printf("%s\t", title);
+	printf("%s\t", artist);
+	printf("%s\t", album);
+	printf("%s\t", year);
+	printf("%s\t", comment);
 
 	if (comment[28] == '\0' && comment[29] != '\0') {
 		/* The tag is ID3v1.1 */
-		if (tabulated) {
-			printf("%02u\t", comment[29]);
-		} else {
-			printf("Track   : %02u\n", comment[29]);
-		}
+		printf("%02u\t", comment[29]);
 	} else {
-		if (tabulated) {
-			printf("--\t");
-		}
+		printf("--\t");
 	}
 
-	if (tabulated) {
-		printf("%s\n", genres[genre]);
-	} else {
-		printf("Genre   : %s\n\n", genres[genre]);
-	}
-
+	printf("%s\n", genres[genre]);
 	return;
 }
 
@@ -246,36 +226,23 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		return 0; /* Only work with named files, not stdin */
 	} else {
+		printf("File\t");
+		printf("Title\t");
+		printf("Artist\t");
+		printf("Album\t");
+		printf("Year\t");
+		printf("Comment\t");
+		printf("T#\t");
+		printf("Genre\n");
+
 		while (--argc > 0) {
-			argv++;
-
-			if (strcmp(*argv, "-t") == 0) {
-				tabulated = 1;
-
-				printf("File\t");
-				printf("Title\t");
-				printf("Artist\t");
-				printf("Album\t");
-				printf("Year\t");
-				printf("Comment\t");
-				printf("T#\t");
-				printf("Genre\n");
-
-				continue;
-			}
-
-			filePointer = fopen(*argv, "r");
+			filePointer = fopen(*++argv, "r");
 
 			if (filePointer == NULL) {
 				continue;
 			}
 
-			if (tabulated) {
-				printf("%s\t", *argv);
-			} else {
-				printf("%s\n", *argv);
-			}
-
+			printf("%s\t", *argv);
 			describeFile(filePointer, stdout);
 			fclose(filePointer);
 		}
