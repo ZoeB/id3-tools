@@ -231,6 +231,16 @@ int main(int argc, char *argv[]) {
 
 			if (strcmp(*argv, "-t") == 0) {
 				tabulated = 1;
+
+				printf("File\t");
+				printf("Title\t");
+				printf("Artist\t");
+				printf("Album\t");
+				printf("Year\t");
+				printf("Comment\t");
+				printf("#\t");
+				printf("Genre\n");
+
 				continue;
 			}
 
