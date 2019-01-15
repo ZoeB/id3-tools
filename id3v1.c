@@ -226,16 +226,15 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) {
 		return 0; /* Only work with named files, not stdin */
 	} else {
-		argv++;
-
 		while (--argc > 0) {
+			argv++;
+
 			if (strcmp(*argv, "-t") == 0) {
 				tabulated = 1;
-				argv++;
 				continue;
 			}
 
-			filePointer = fopen(*argv++, "r");
+			filePointer = fopen(*argv, "r");
 
 			if (filePointer == NULL) {
 				continue;
