@@ -237,9 +237,9 @@ int main(int argc, char *argv[]) {
 		}
 
 		if (tabulated) {
-			printf("%s\t", *argv);
+			printf("%s\t", argv[argi]);
 		} else {
-			printf("%s\n", *argv);
+			printf("%s\n", argv[argi]);
 		}
 
 		describeFile(filePointer, stdout);
