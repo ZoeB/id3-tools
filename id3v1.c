@@ -51,9 +51,9 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 	if (comment[28] == '\0' && comment[29] != '\0') {
 		/* The tag is ID3v1.1 */
 		if (tabulated) {
-			printf("%u\t", comment[29]);
+			printf("%02u\t", comment[29]);
 		} else {
-			printf("Track   : %u\n", comment[29]);
+			printf("Track   : %02u\n", comment[29]);
 		}
 	} else {
 		if (tabulated) {
