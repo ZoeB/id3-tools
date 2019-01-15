@@ -66,7 +66,12 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 		printf("--\t");
 	}
 
-	printf("%s\n", genres[genre]);
+	if (genres[genre] != '\0') {
+		printf("%s\n", genres[genre]);
+	} else {
+		printf("-\n");
+	}
+
 	return;
 }
 
