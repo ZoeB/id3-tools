@@ -20,7 +20,7 @@ void describeFile(FILE *inputFilePointer, FILE *outputFilePointer) {
 	   ID3v1 tag.  Quit. */
 
 	if (getc(inputFilePointer) != 'T' || getc(inputFilePointer) != 'A' || getc(inputFilePointer) != 'G') {
-		printf("No ID3v1 tag found.\n\n");
+		printf("-\t-\t-\t-\t-\t--\t-\n");
 		return;
 	}
 
